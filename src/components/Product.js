@@ -1,6 +1,8 @@
 import React ,{useState,useEffect} from 'react'
 import ProductInput from './ProductInput';
 import {sortBy} from 'lodash'
+import CostsList from './CostsList';
+import FilterData from './FilterData';
 
 
 export default function Product() {
@@ -26,15 +28,27 @@ export default function Product() {
      setItemAr(_ar)
     
 }
+const removeAllTasks =()=>{
+  saveLocal([])
+}
+
+const sortByMonth =(_id)=>{
+  let temp_ar = items_ar.filter(item =>item.name == _id);
+  saveLocal(temp_ar)
+}
 
 
 
   return (
 
     <div className='container'>
-    <h1 className='display-4'>Costs Project</h1>
-    <div  className="col-lg-6 p-3 mx-auto">
-    <ProductInput addTask={addTask} />
+    <div  className='col-lg-6 p-3 mx-auto '>
+    <ProductInput addTask={addTask} removeAllTasks={removeAllTasks} />
+
+
+
+
+    <CostsList items_ar={items_ar} sortByMonth={sortByMonth}  />
 
       </div>
     </div>
